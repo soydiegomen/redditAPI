@@ -3,6 +3,7 @@ export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT';
 export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT';
+export const RECEIVE_SIMPLE_POSTS = 'RECEIVE_SIMPLE_POSTS';
 
 export function selectSubreddit(subreddit) {
   return {
@@ -59,5 +60,21 @@ export function fetchPostsIfNeeded(subreddit) {
     if (shouldFetchPosts(getState(), subreddit)) {
       return dispatch(fetchPosts(subreddit))
     }
+  }
+}
+
+/*Simple posts*/
+export function fetchSimplePosts(subreddit) {
+  return dispatch => {
+    return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveSimplePosts(subreddit, json)));
+  }
+}
+
+function receiveSimplePosts(subreddit, json) {
+  return {
+    type: RECEIVE_SIMPLE_POSTS,
+    posts: json.data.children.map(child => child.data),
   }
 }

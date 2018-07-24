@@ -4,7 +4,8 @@ import {
   SELECT_SUBREDDIT,
   INVALIDATE_SUBREDDIT,
   REQUEST_POSTS,
-  RECEIVE_POSTS
+  RECEIVE_POSTS,
+  RECEIVE_SIMPLE_POSTS
 } from '../actions';
 
 function selectedSubreddit(state = 'reactjs', action) {
@@ -59,9 +60,20 @@ function postsBySubreddit(state = {}, action) {
   }
 }
 
+function simplePosts(state = [], action) {
+    console.log('RECEIVE_SIMPLE_POSTS', action.posts);
+    switch (action.type) {
+      case RECEIVE_SIMPLE_POSTS:
+        return action.posts;
+      default:
+        return state;
+    }
+}
+
 const rootReducer = combineReducers({
   postsBySubreddit,
-  selectedSubreddit
-})
+  selectedSubreddit,
+  simplePosts
+});
 
 export default rootReducer;

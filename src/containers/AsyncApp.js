@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import {
   selectSubreddit,
   fetchPostsIfNeeded,
-  invalidateSubreddit
+  invalidateSubreddit,
+  fetchSimplePosts
 } from '../actions';
 import Posts from '../components/Posts';
 import Picker from '../components/Picker';
+import SimpleList from './SimpleList';
 
 //TODO EMPECEMOS POR MOSTRAR LOS POSTS
 class AsyncApp extends Component {
@@ -21,6 +23,7 @@ class AsyncApp extends Component {
   componentDidMount() {
     const { dispatch, selectedSubreddit } = this.props;
     dispatch(fetchPostsIfNeeded(selectedSubreddit));
+    dispatch(fetchSimplePosts(selectedSubreddit));
   }
 
   componentDidUpdate(prevProps) {
@@ -46,6 +49,7 @@ class AsyncApp extends Component {
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
     return (
       <div>
+        <SimpleList />
         <h1>Async App</h1>
         <Picker
           value={selectedSubreddit}
