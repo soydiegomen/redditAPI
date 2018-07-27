@@ -7,7 +7,11 @@ class SimpleList extends Component {
     return (
       <div>
         <h3>Simple Section</h3>
-
+        {this.props.simplePosts.length > 0 &&
+          <ul>
+            {this.props.simplePosts.map((post, i) => <li key={i}>{post.title}</li>)}
+          </ul>
+        }
       </div>
     )
   }

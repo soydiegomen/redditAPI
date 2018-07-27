@@ -46,10 +46,11 @@ class AsyncApp extends Component {
   }
 
   render() {
-    const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
+    const { selectedSubreddit, posts, isFetching, lastUpdated, simplePosts } = this.props;
+    console.log('Render simplePosts', simplePosts);
     return (
       <div>
-        <SimpleList />
+        <SimpleList simplePosts={simplePosts}/>
         <h1>Async App</h1>
         <Picker
           value={selectedSubreddit}
@@ -79,7 +80,7 @@ class AsyncApp extends Component {
 }
 
 function mapStateToProps(state) {
-  const { selectedSubreddit, postsBySubreddit } = state;
+  const { selectedSubreddit, postsBySubreddit, simplePosts } = state;
   const {
     isFetching,
     lastUpdated,
@@ -93,7 +94,8 @@ function mapStateToProps(state) {
     selectedSubreddit,
     posts,
     isFetching,
-    lastUpdated
+    lastUpdated,
+    simplePosts
   }
 }
 

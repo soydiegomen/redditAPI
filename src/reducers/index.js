@@ -61,7 +61,6 @@ function postsBySubreddit(state = {}, action) {
 }
 
 function simplePosts(state = [], action) {
-    console.log('RECEIVE_SIMPLE_POSTS', action.posts);
     switch (action.type) {
       case RECEIVE_SIMPLE_POSTS:
         return action.posts;
