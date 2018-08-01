@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import {
   selectSubreddit,
   fetchPostsIfNeeded,
-  invalidateSubreddit,
-  fetchSimplePosts
+  invalidateSubreddit
 } from '../actions';
 import Posts from '../components/Posts';
 import Picker from '../components/Picker';
@@ -23,7 +22,6 @@ class AsyncApp extends Component {
   componentDidMount() {
     const { dispatch, selectedSubreddit } = this.props;
     dispatch(fetchPostsIfNeeded(selectedSubreddit));
-    dispatch(fetchSimplePosts(selectedSubreddit));
   }
 
   componentDidUpdate(prevProps) {
@@ -46,11 +44,10 @@ class AsyncApp extends Component {
   }
 
   render() {
-    const { selectedSubreddit, posts, isFetching, lastUpdated, simplePosts } = this.props;
-    console.log('Render simplePosts', simplePosts);
+    const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
     return (
       <div>
-        <SimpleList simplePosts={simplePosts}/>
+        <SimpleList/>
         <h1>Async App</h1>
         <Picker
           value={selectedSubreddit}
@@ -80,7 +77,7 @@ class AsyncApp extends Component {
 }
 
 function mapStateToProps(state) {
-  const { selectedSubreddit, postsBySubreddit, simplePosts } = state;
+  const { selectedSubreddit, postsBySubreddit } = state;
   const {
     isFetching,
     lastUpdated,
@@ -94,8 +91,7 @@ function mapStateToProps(state) {
     selectedSubreddit,
     posts,
     isFetching,
-    lastUpdated,
-    simplePosts
+    lastUpdated
   }
 }
 

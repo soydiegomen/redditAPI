@@ -5,7 +5,8 @@ import {
   INVALIDATE_SUBREDDIT,
   REQUEST_POSTS,
   RECEIVE_POSTS,
-  RECEIVE_SIMPLE_POSTS
+  RECEIVE_SIMPLE_POSTS,
+  SUBMIT_SUBREDDIT
 } from '../actions';
 
 function selectedSubreddit(state = 'reactjs', action) {
@@ -69,10 +70,20 @@ function simplePosts(state = [], action) {
     }
 }
 
+function sentSubreddit(state = 'nodejs', action) {
+  switch (action.type) {
+    case SUBMIT_SUBREDDIT:
+      return action.subreddit
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   postsBySubreddit,
   selectedSubreddit,
-  simplePosts
+  simplePosts,
+  sentSubreddit
 });
 
 export default rootReducer;

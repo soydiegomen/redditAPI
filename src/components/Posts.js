@@ -6,9 +6,9 @@ class Posts extends Component {
     return (
       <div>
         <h3>Posts</h3>
-        <ul>
+        <ol>
           {this.props.posts.map((post, i) => <li key={i}>{post.title}</li>)}
-        </ul>
+        </ol>
       </div>
     );
   }

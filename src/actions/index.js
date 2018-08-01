@@ -3,7 +3,9 @@ export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT';
 export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT';
+/*Simple example*/
 export const RECEIVE_SIMPLE_POSTS = 'RECEIVE_SIMPLE_POSTS';
+export const SUBMIT_SUBREDDIT = 'SUBMIT_SUBREDDIT';
 
 export function selectSubreddit(subreddit) {
   return {
@@ -76,5 +78,12 @@ function receiveSimplePosts(subreddit, json) {
   return {
     type: RECEIVE_SIMPLE_POSTS,
     posts: json.data.children.map(child => child.data),
+  }
+}
+
+export function submitSubreddit(subreddit) {
+  return {
+    type: SUBMIT_SUBREDDIT,
+    subreddit
   }
 }
