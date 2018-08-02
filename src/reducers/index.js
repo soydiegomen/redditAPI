@@ -6,7 +6,8 @@ import {
   REQUEST_POSTS,
   RECEIVE_POSTS,
   RECEIVE_SIMPLE_POSTS,
-  SUBMIT_SUBREDDIT
+  SUBMIT_SUBREDDIT,
+  UPDATE_POST_TIME
 } from '../actions';
 
 function selectedSubreddit(state = 'reactjs', action) {
@@ -79,11 +80,21 @@ function sentSubreddit(state = 'nodejs', action) {
   }
 }
 
+function updatedPostTime(state = new Date(2018, 11, 24, 1, 1, 1, 0), action) {
+  switch (action.type) {
+    case UPDATE_POST_TIME:
+      return Date.now();
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   postsBySubreddit,
   selectedSubreddit,
   simplePosts,
-  sentSubreddit
+  sentSubreddit,
+  updatedPostTime
 });
 
 export default rootReducer;

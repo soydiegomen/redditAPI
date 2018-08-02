@@ -6,6 +6,7 @@ export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT';
 /*Simple example*/
 export const RECEIVE_SIMPLE_POSTS = 'RECEIVE_SIMPLE_POSTS';
 export const SUBMIT_SUBREDDIT = 'SUBMIT_SUBREDDIT';
+export const UPDATE_POST_TIME = 'UPDATE_POST_TIME';
 
 export function selectSubreddit(subreddit) {
   return {
@@ -70,7 +71,10 @@ export function fetchSimplePosts(subreddit) {
   return dispatch => {
     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
       .then(response => response.json())
-      .then(json => dispatch(receiveSimplePosts(subreddit, json)));
+      .then(json => {
+        dispatch(updatePostTime());
+        dispatch(receiveSimplePosts(subreddit, json))
+      });
   }
 }
 
@@ -85,5 +89,12 @@ export function submitSubreddit(subreddit) {
   return {
     type: SUBMIT_SUBREDDIT,
     subreddit
+  }
+}
+
+/*No se necesita el export por que lo llama un action*/
+function updatePostTime() {
+  return {
+    type: UPDATE_POST_TIME
   }
 }
